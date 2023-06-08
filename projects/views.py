@@ -8,6 +8,8 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.urls import reverse_lazy
 
+
+
 # Create your views here.
 def currentTime(request):
 	current_date_time = datetime.datetime.now()
@@ -19,44 +21,44 @@ def home(request):
  
 class ProjectListView(ListView):
    model = Project
-   template_name = 'projects.html'
+   template_name = 'projects/projects.html'
 
 class ProjectCreateView(CreateView):
     model = Project
     fields = ["name","description"]
-    template_name = 'project_create_form.html'
+    template_name = 'projects/project_create_form.html'
     success_url = reverse_lazy('projects')
 
 class ProjectUpdateView(UpdateView):
     model = Project
-    template_name = 'project_update_form.html'
+    template_name = 'projects/project_update_form.html'
     fields = ["name","description"]
     success_url = reverse_lazy('projects')
 
 class ProjectDeleteView(DeleteView):
     model = Project
-    template_name = 'project_confirm_delete.html'
+    template_name = 'projects/project_confirm_delete.html'
     success_url = reverse_lazy('projects')
 
 class TaskListView(ListView):
    model = Task
-   template_name = 'tasks.html'
+   template_name = 'projects/tasks.html'
 
 class TaskCreateView(CreateView):
     model = Task
     fields = '__all__'
-    template_name = 'task_create_form.html'
+    template_name = 'projects/task_create_form.html'
     success_url = reverse_lazy('tasks')
 
 class TaskUpdateView(UpdateView):
     model = Task
-    template_name = 'task_update_form.html'
+    template_name = 'projects/task_update_form.html'
     fields = ["title","description","project","assignee","due_date","status"]
     success_url = reverse_lazy('tasks')
 
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = 'task_confirm_delete.html'
+    template_name = 'projects/task_confirm_delete.html'
     success_url = reverse_lazy('tasks')
  
 
@@ -65,12 +67,12 @@ def projectDetail(request,pk):
    project_tasks = project.task_set.all()
    
    context = {'project':project,'project_tasks':project_tasks}
-   return render(request, 'project-detail.html',context)
+   return render(request, 'projects/project-detail.html',context)
 
 def taskDetail(request,pk):
     task = get_object_or_404(Task, id=pk)
     context = {'task':task}
-    return render(request, 'task-detail.html',context)
+    return render(request, 'projects/task-detail.html',context)
 
 def joinTask(request,pk):
    task =Task.objects.get(id=pk)
@@ -78,5 +80,5 @@ def joinTask(request,pk):
    task.save()
    return redirect('tasks')
 
-   
+
 

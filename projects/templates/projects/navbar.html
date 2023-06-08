@@ -19,10 +19,23 @@
             <li class="nav-item">
                <a class="nav-link btn btn-primary" href="{% url 'create-project' %}">Create Project</a>
             </li>
+            <li class="nav-item">
+               <a class="nav-link btn btn-primary" href="{% url 'create-project' %}">{{user}}</a>
+            </li>
          </ul>
       </div>
-      <a class="btn btn-primary" href="" role="button">Sign Up</a>
-      <a class="btn btn-primary" href="" role="button">Login</a>
+       
+      
+       
+     
+     {% if user.is_authenticated %}
+      <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
+      {% else %}
+       <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+
+       <a class="btn btn-primary" href="{% url 'register' %}" role="button">Sign Up</a>
+      
+      {% endif %}
    </div>
    </div>
    </div>
