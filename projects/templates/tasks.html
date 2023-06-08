@@ -23,7 +23,7 @@
                        <th scope="col">Actions</th>
                     </tr>
                  </thead>
-                 {% for task in user_tasks %}
+                 {% for task in object_list %}
                  <tbody>
                  
                     <tr class="fw-normal">
@@ -46,9 +46,10 @@
                           <h6 class="mb-0"><span class="badge bg-success">{{task.project}}</span></h6>
                        </td>
                        <td class="border-0 align-middle">
-                          <a href="" data-mdb-toggle="tooltip" title="Done"><i
-                             class="fas fa-check fa-lg text-success me-3">Mark Complete / Update</i></a>
-                       </td>
+    <a href="{% url 'update-task' task.id%}" data-mdb-toggle="tooltip" title="Done"><i
+     class="fas fa-check fa-lg text-success me-3">Mark Complete / Update</i>
+    </a>
+   </td>
                     </tr>
                     {% endfor %}
                  </tbody>
@@ -57,15 +58,14 @@
         </div>
      </div>
   </div>
-  <h1>Other Tasks</h1>
-  <ul class="list-group">
-     {% for task in tasks%}
-   
-     <li class="list-group-item d-flex justify-content-between align-items-center">
-        {{task.title}} ({{task.project}})
-        <a href=" " class="btn btn-primary">More Details</a>
-     </li>
-  </ul>
-  {% endfor%}
+ <h1> Unassigned Tasks</h1>
+<ul class="list-group">
+   {% for task in tasks%}
+   <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{task.title}} ({{task.project}})
+      <a href="{% url 'task-detail' task.id%}" class="btn btn-primary">More Details</a>
+   </li>
+</ul>
+{% endfor%}
 </div>
 {% endblock content %}

@@ -32,6 +32,7 @@
                            <th>Task</th>
                            <th>Assignee</th>
                            <th>due_date</th>
+                           <th>Action</th>
                          </tr>
                        </thead>
                        {% for task in project_tasks %}
@@ -40,6 +41,7 @@
                            <td>{{ task.title }}</td>
                            <td>{{ task.assignee }}</td>
                            <td>{{ task.due_date }}</td>
+                           <td><a href="{% url 'delete-task' task.pk %}" class="btn btn-danger">Delete</a></td>
                          </tr>
                         
                        </tbody>
