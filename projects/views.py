@@ -7,8 +7,8 @@ from .forms import TaskForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.urls import reverse_lazy
-
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def currentTime(request):
@@ -17,7 +17,7 @@ def currentTime(request):
 
 
 def home(request):
-    return render(request, 'base.html')
+    return render(request, 'projects/base.html')
  
 class ProjectListView(ListView):
    model = Project
